@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f6881e4e4d6b04f83bb23a89236d8d, type: 3}
+  m_Name: GreenShip
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 8164858156288453136, guid: 380a366d660fd7f4c9bd1340ff3c70d6, type: 3}
+  BaseHealth: 150
+  BaseAttack: 7
+  BaseAttackSpeed: 2
+  CurrentHealthLevel: 10
+  CurrentAttackLevel: 10
+  CurrentAttackSpeedLevel: 10
+  MaxLevel: 1
+  HealthMultiplier: 0.05
+  AttackMultiplier: 0.1
+  AttackSpeedhMultiplier: 0.05
+  Price: 1500
+  State: 0
+  PriceUpHealth: 125
+  PriceUpAttack: 125
+  PriceUpAttackSpeed: 125

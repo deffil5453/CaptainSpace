@@ -1,0 +1,3 @@
+﻿Build path: C:/Users/nozdr/Desktop/captain
+Build number: 4
+PluginYG version: 2.007

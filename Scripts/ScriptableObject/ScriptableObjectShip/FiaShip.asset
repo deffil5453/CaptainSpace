@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f6881e4e4d6b04f83bb23a89236d8d, type: 3}
+  m_Name: FiaShip
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 6097491702223864399, guid: e72e85d5dc149014793b39038b8d3659, type: 3}
+  BaseHealth: 200
+  BaseAttack: 20
+  BaseAttackSpeed: 0.5
+  CurrentHealthLevel: 10
+  CurrentAttackLevel: 10
+  CurrentAttackSpeedLevel: 10
+  MaxLevel: 1
+  HealthMultiplier: 0.05
+  AttackMultiplier: 0.1
+  AttackSpeedhMultiplier: 0.05
+  Price: 2500
+  State: 0
+  PriceUpHealth: 200
+  PriceUpAttack: 200
+  PriceUpAttackSpeed: 200

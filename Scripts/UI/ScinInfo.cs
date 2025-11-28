@@ -25,7 +25,7 @@ public class ScinInfo : MonoBehaviour
     public Button OpenAnimationButton;
     private void Awake()
     {
-        _ship = GetComponentInParent<ScinShipControl>().Ship;
+        //_ship = GetComponentInParent<ScinShipControl>().Ship;
         //_animator = GetComponent<Animator>();
         _healthText = transform.Find("HealthBlock").Find("HealthText").GetComponent<TMP_Text>();
         _attackText = transform.Find("AttackBlock").Find("AttackText").GetComponent<TMP_Text>();

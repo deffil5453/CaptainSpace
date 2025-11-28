@@ -9,25 +9,21 @@ public class ScinShipControl : MonoBehaviour
 {
     [SerializeField] private Ship _ship;
     [SerializeField] private Inventory _inventory;
-    public int ScinNum;
+    //public int ScinNum;
     public int Price;
-    public int Id;
+    //public int Id;
 
     public ShipState State;
 
     [SerializeField] private GameObject SpriteObject;
 
-    public MenuManager MenuManager;
+    public MenuManager MenuManagerScene;
 
     public TMP_Text PriceText;
 
     [SerializeField] private Button _buyButton;
     [SerializeField] private Button _selectedButton;
-
-    [Header(" нопки прокачки корабл€")]
-    [SerializeField] private Button _healthUpButton;
-    [SerializeField] private Button _attackUpButton;
-    [SerializeField] private Button _attackSpeedUpButton;
+    public ShowPopupManagerScript _showPopupManagerScript;
     private void Start()
     {
         Price = _ship.Price;
@@ -47,14 +43,19 @@ public class ScinShipControl : MonoBehaviour
         {
             PriceText.text = Price.ToString();
         }
-        MenuManager = FindObjectOfType<MenuManager>();
+        MenuManagerScene = FindObjectOfType<MenuManager>();
+        _showPopupManagerScript = FindObjectOfType<ShowPopupManagerScript>();
     }
-    public Ship Ship
+    //public Ship Ship
+    //{
+    //    get
+    //    {
+    //        return _ship;
+    //    }
+    //}
+    public void ShowInfoShip()
     {
-        get
-        {
-            return _ship;
-        }
+        _showPopupManagerScript.InfoShipWindow(_ship);
     }
     public void Buy(bool isBuy)
     {
@@ -72,8 +73,9 @@ public class ScinShipControl : MonoBehaviour
             _selectedButton.gameObject.GetComponentInChildren<TMP_Text>().text = "выбрать";
             _ship.State = ShipState.Buyed;
             MenuManager.TotalMoney -= Price;
+            _inventory.Coins -= MenuManager.TotalMoney;
             PlayerPrefs.SetInt("PlayerMoney", MenuManager.TotalMoney);
-            MenuManager.UpdateMoneyText();
+            MenuManagerScene.UpdateMoneyText();
             PlayerPrefs.Save();
         }
         else
@@ -99,16 +101,5 @@ public class ScinShipControl : MonoBehaviour
         //_selectedButton.gameObject.GetComponent<Animator>().enabled = false;
         _selectedButton.gameObject.GetComponentInChildren<TMP_Text>().text = "выбран";
         Debug.Log(_selectedButton.gameObject.GetComponentInChildren<TMP_Text>().text);
-    }
-    public void BuyUpHealth()
-    {
-        if (MenuManager.TotalMoney < _ship.PriceUpHealth && _ship.CurrentHealthLevel < _ship.MaxLevel)
-        {
-            return;
-        }
-        _ship.BaseHealth += 50;
-        _ship.CurrentHealthLevel++;
-        EventsManager.UpActivation(-_ship.PriceUpHealth);
-
     }
 }

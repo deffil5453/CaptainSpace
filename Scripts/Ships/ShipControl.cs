@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.AssetImporters;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,13 +10,15 @@ public class ShipControl : MonoBehaviour
     public GameManager GameManager;
 
     [SerializeField] private bool _isInvulnerable;
+    [SerializeField] private bool _isMultiShotActive;
     private Coroutine _isInvulnerabilityCoroutine;
     public GameObject InvulnerableAnimator;
     private ShipHealthSystem _healthSystem;
     public Image Bar;
-
+    [SerializeField] private ShipAttack _shipAttack;
     private void Start()
     {
+        _shipAttack = GetComponent<ShipAttack>();
         _healthSystem = GetComponent<ShipHealthSystem>();
         GameManager = FindFirstObjectByType<GameManager>();
     }
@@ -58,8 +61,24 @@ public class ShipControl : MonoBehaviour
             _isInvulnerable = true; // Устанавливаем неуязвимость
             _isInvulnerabilityCoroutine = StartCoroutine(InvulnerabilityDuration(invunerability.GetInvunerabilityDuration())); // Запускаем новую корутину
         }
+        else if (collision.gameObject.CompareTag("MultiShot"))
+        {
+            MultiShootScript multiShootScript = collision.gameObject.GetComponent<MultiShootScript>();
+            Destroy(collision.gameObject);
+
+            _shipAttack.BulletCount = 2;
+            _isMultiShotActive = true;
+            StartCoroutine(MultiShootDuration(multiShootScript.Duration));
+        }
     }
-    
+    private IEnumerator MultiShootDuration(float timeDuration)
+    {
+        //InvulnerableAnimator.SetActive(true);
+        yield return new WaitForSeconds(timeDuration);
+        _isMultiShotActive = false;
+        _shipAttack.BulletCount = 1;
+        //InvulnerableAnimator.SetActive(false);
+    }
     private IEnumerator InvulnerabilityDuration(float timeDuration)
     {
         InvulnerableAnimator.SetActive(true);

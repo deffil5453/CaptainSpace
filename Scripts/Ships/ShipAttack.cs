@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShipAttack : MonoBehaviour
 {
     public GameObject Bullets;
+    public int BulletCount = 1;
     [SerializeField] private float _attackSpeed = 0.3f;
     [SerializeField] private float _shipAttack = 10;
     public AudioSource _attackSound;
@@ -25,24 +26,46 @@ public class ShipAttack : MonoBehaviour
     {
         while (true)
         {
-            Vector3 bulletsPosition = transform.position + new Vector3(0, 1, 0);
             if (_attackSound != null)
             {
                 _attackSound.Play();
-
             }
-            GameObject bullet = Instantiate(Bullets, bulletsPosition, Quaternion.identity);
-            BulletControl bulletControl = bullet.GetComponent<BulletControl>();
-            if (bulletControl != null)
+            if (BulletCount > 1)
             {
-                bulletControl.SetDamage(_shipAttack);
+                for (int i = 0; i < BulletCount; i++)
+                {
+                    Vector3 bulletsPosition = transform.position + new Vector3(i, 1, 0);
+                    GameObject bullet = Instantiate(Bullets, bulletsPosition, Quaternion.identity);
+                    BulletControl bulletControl = bullet.GetComponent<BulletControl>();
+                    if (bulletControl != null)
+                    {
+                        bulletControl.SetDamage(_shipAttack);
+                    }
+                }
             }
+            else
+            {
+                Vector3 bulletsPosition = transform.position + new Vector3(0, 1, 0);
+                GameObject bullet = Instantiate(Bullets, bulletsPosition, Quaternion.identity);
+                BulletControl bulletControl = bullet.GetComponent<BulletControl>();
+                if (bulletControl != null)
+                {
+                    bulletControl.SetDamage(_shipAttack);
+                }
+            }
+            //Vector3 bulletsPosition = transform.position + new Vector3(0, 1, 0);
+            //GameObject bullet = Instantiate(Bullets, bulletsPosition, Quaternion.identity);
+            //BulletControl bulletControl = bullet.GetComponent<BulletControl>();
+            //if (bulletControl != null)
+            //{
+            //    bulletControl.SetDamage(_shipAttack);
+            //}
             yield return new WaitForSeconds(attackSpeed);
         }
     }
     public void Inizialize(float attack, float attackSpeed)
     {
         _shipAttack = attack;
-        _attackSpeed = attackSpeed; 
+        _attackSpeed = attackSpeed;
     }
 }

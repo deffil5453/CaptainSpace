@@ -11,10 +11,6 @@ public class BulletsMove : MonoBehaviour
         Move();
         Destroy(gameObject, _lifeTime);
     }
-    private void Update()
-    {
-        //Move();
-    }
     private void Move()
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();   

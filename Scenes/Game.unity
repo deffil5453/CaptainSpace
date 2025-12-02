@@ -2784,6 +2784,7 @@ MonoBehaviour:
   SupportItems:
   - {fileID: 4622436166480041780, guid: a0a93f98db48a5149aaf90e4007b6f83, type: 3}
   - {fileID: 1953851491787661743, guid: b514ef69d7b3ce446ada19133be4d013, type: 3}
+  - {fileID: 744820862397571410, guid: 652b31334f88865488a5889e3632cde7, type: 3}
   _minXSpawnPosition: -2.4
   _maxXSpawnPosition: 2.4
   _minSpawnDelay: 10

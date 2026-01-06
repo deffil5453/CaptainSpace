@@ -8,6 +8,7 @@ public class ShipAttack : MonoBehaviour
     public int BulletCount = 1;
     [SerializeField] private float _attackSpeed = 0.3f;
     [SerializeField] private float _shipAttack = 10;
+     private float _lengthAttackSpawnBullet = 1f;
     public AudioSource _attackSound;
     public float GetAttack()
     {
@@ -32,9 +33,13 @@ public class ShipAttack : MonoBehaviour
             }
             if (BulletCount > 1)
             {
+                float step = _lengthAttackSpawnBullet / (BulletCount-1);
+                print(step);
                 for (int i = 0; i < BulletCount; i++)
                 {
-                    Vector3 bulletsPosition = transform.position + new Vector3(i, 1, 0);
+                    float xOffset = (-_lengthAttackSpawnBullet / 2) + i * step;
+                    print(xOffset);
+                    Vector3 bulletsPosition = transform.position + new Vector3(xOffset, 1, 0);
                     GameObject bullet = Instantiate(Bullets, bulletsPosition, Quaternion.identity);
                     BulletControl bulletControl = bullet.GetComponent<BulletControl>();
                     if (bulletControl != null)

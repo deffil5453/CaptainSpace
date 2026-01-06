@@ -110,7 +110,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0aab17f474ae0434eb7aff4a29cc0123, type: 3}
   - {fileID: 21300000, guid: 7d2d52905e45ae247b3390d0f42fdc49, type: 3}
   - {fileID: 21300000, guid: 8ff5851d96e353540b1e6d34f6dafe7b, type: 3}
-  MinX: -15
-  MaxX: 15
-  MinY: -15
-  MaxY: 15
+  MinX: -20
+  MaxX: 20
+  MinY: -20
+  MaxY: 20

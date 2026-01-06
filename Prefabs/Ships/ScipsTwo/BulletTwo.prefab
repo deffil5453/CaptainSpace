@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0bfc5ad5659614b867c4f44bdc8734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DestroyEffect: {fileID: 4291253457533560942, guid: b0873187f9b67c44699888e36011692a, type: 3}
 --- !u!70 &-3651337858116773054
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

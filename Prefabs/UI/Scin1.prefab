@@ -975,10 +975,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7079828400975438008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1.8800011}
-  m_SizeDelta: {x: 0, y: -13.53}
+  m_AnchorMin: {x: 0.09992627, y: 0.13211393}
+  m_AnchorMax: {x: 0.9000738, y: 0.9039171}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &143596496452421776
 CanvasRenderer:
@@ -1035,7 +1035,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55.35
+  m_fontSize: 51.45
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1131,13 +1131,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ship: {fileID: 0}
   _inventory: {fileID: 11400000, guid: 74f397d4ab27e7947a40f2e051dac063, type: 2}
-  ScinNum: 0
   Price: 0
-  Id: 0
   State: 0
   SpriteObject: {fileID: 4275314365740117762}
   MenuManagerScene: {fileID: 0}
   PriceText: {fileID: 4446703262827929176}
   _buyButton: {fileID: 8080638189489956266}
   _selectedButton: {fileID: 4852049969349751525}
-  ShipUpgradeManagerScene: {fileID: 0}
+  _showPopupManagerScript: {fileID: 0}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletControl : MonoBehaviour
 {
+    public ParticleSystem DestroyEffect;
     private float _currentDamage;
     public float SetDamage(float damage)
     {
@@ -19,7 +20,8 @@ public class BulletControl : MonoBehaviour
             {
                 enemyControl.TakeDamage(_currentDamage);
             }
-            //Destroy(gameObject);
+            Destroy(gameObject);
+            Instantiate(DestroyEffect, transform.position, Quaternion.identity);
         }
         if (collision.gameObject.CompareTag("Healthler"))
         {
@@ -29,6 +31,6 @@ public class BulletControl : MonoBehaviour
                 healControl.SummingHealth(_currentDamage);
             }
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

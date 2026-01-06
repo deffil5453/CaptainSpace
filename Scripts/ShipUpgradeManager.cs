@@ -47,32 +47,33 @@ public class ShipUpgradeManager : MonoBehaviour
     }
     public void BuyUpHealth()
     {
-        if (MenuManager.TotalMoney < _ship.PriceUpHealth && _ship.CurrentHealthLevel < _ship.MaxLevel)
+        if (MenuManager.TotalMoney < _ship.PriceUpHealth)
         {
             return;
         }
+
         _ship.BaseHealth += 20;
         _ship.CurrentHealthLevel++;
-        EventsManager.UpActivation(-_ship.PriceUpHealth);
+        EventsManager.UpActivation(-_ship.PriceUpHealth); ScinInfoInizialize();
     }
     public void BuyUpAttack()
     {
-        if (MenuManager.TotalMoney < _ship.PriceUpAttack && _ship.CurrentAttackLevel < _ship.MaxLevel)
+        if (MenuManager.TotalMoney < _ship.PriceUpAttack)
         {
             return;
         }
         _ship.BaseAttack += 1;
         _ship.CurrentAttackLevel++;
-        EventsManager.UpActivation(-_ship.PriceUpAttack);
+        EventsManager.UpActivation(-_ship.PriceUpAttack); ScinInfoInizialize();
     }
     public void BuyUpAttackSpeed()
     {
-        if (MenuManager.TotalMoney < _ship.PriceUpAttackSpeed && _ship.CurrentAttackSpeedLevel < _ship.MaxLevel)
+        if (MenuManager.TotalMoney < _ship.PriceUpAttackSpeed)
         {
             return;
         }
         _ship.BaseAttackSpeed += 1f;
         _ship.CurrentAttackSpeedLevel++;
-        EventsManager.UpActivation(-_ship.PriceUpAttackSpeed);
+        EventsManager.UpActivation(-_ship.PriceUpAttackSpeed); ScinInfoInizialize();
     }
 }

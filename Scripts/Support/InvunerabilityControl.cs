@@ -1,12 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
-public class InvunerabilityControl : MonoBehaviour
+public class InvunerabilityControl : SupportControl
 {
-    [SerializeField] private float _invunerabilityDuration;
-    public float GetInvunerabilityDuration()
+    //[SerializeField] private float _invunerabilityDuration;
+    //public float GetInvunerabilityDuration()
+    //{
+    //    return _invunerabilityDuration;
+    //}
+    [SerializeField] private GameObject _invulVisualObject;
+    public override void PickUp(ShipControl ship)
     {
-        return _invunerabilityDuration;
+        ship.StartCoroutine(InvulnerabilityDuration(8f, ship));
+    }
+    private IEnumerator InvulnerabilityDuration(float timeDuration, ShipControl ship/* AnimatorController invulAnimator*/)
+    {
+        //InvulnerableAnimator.SetActive(true);
+        //invulAnimator.startAn
+
+        yield return new WaitForSeconds(timeDuration);
+        ship.IsInvul = false;
+        //InvulnerableAnimator.SetActive(false);
     }
 }

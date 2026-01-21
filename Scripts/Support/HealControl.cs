@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class HealControl : MonoBehaviour
+public class HealControl : SupportControl
 {
     [SerializeField] private float HealthScore = 10f;
     public TMP_Text HealthText;
@@ -26,5 +26,10 @@ public class HealControl : MonoBehaviour
     private void UpdateText()
     {
         HealthText.text = HealthScore.ToString() + "%";
+    }
+
+    public override void PickUp(ShipControl ship)
+    {
+        
     }
 }

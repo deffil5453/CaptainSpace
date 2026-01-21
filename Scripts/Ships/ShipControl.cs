@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEditor.AssetImporters;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,11 +12,33 @@ public class ShipControl : MonoBehaviour
 
     [SerializeField] private bool _isInvulnerable;
     [SerializeField] private bool _isMultiShotActive;
-    private Coroutine _isInvulnerabilityCoroutine;
-    public GameObject InvulnerableAnimator;
+    //public GameObject InvulnerableAnimator;
+
     private ShipHealthSystem _healthSystem;
     public Image Bar;
     [SerializeField] private ShipAttack _shipAttack;
+    public bool IsInvul
+    {
+        get
+        {
+            return _isInvulnerable;
+        }
+        set
+        {
+            _isInvulnerable = value;
+        }
+    }
+    public int BulletCount
+    {
+        get
+        {
+            return _shipAttack.BulletCount;
+        }
+        set
+        {
+            _shipAttack.BulletCount = value;
+        }
+    }
     private void Start()
     {
         _shipAttack = GetComponent<ShipAttack>();
@@ -38,52 +61,58 @@ public class ShipControl : MonoBehaviour
             enemyControl.EnemyDead();
 
         }
-        else if (collision.gameObject.CompareTag("Healthler"))
+        else if (collision.gameObject.CompareTag("Support"))
         {
-            HealControl healControl = collision.gameObject.GetComponent<HealControl>();
-            if (healControl != null)
-            {
-                StartCoroutine(_healthSystem.ChangeHealth(healControl.GetHealth(), 1.5f, Bar));
-            }
+            SupportManager.Instance.SupportActive(collision.gameObject, this);
             Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.CompareTag("Invunerable"))
-        {
-            InvunerabilityControl invunerability = collision.gameObject.GetComponent<InvunerabilityControl>();
-            Destroy(collision.gameObject);
+        //else if (collision.gameObject.CompareTag("Healthler"))
+        //{
+        //    HealControl healControl = collision.gameObject.GetComponent<HealControl>();
+        //    if (healControl != null)
+        //    {
+        //        StartCoroutine(_healthSystem.ChangeHealth(healControl.GetHealth(), 1.5f, Bar));
+        //    }
+        //    Destroy(collision.gameObject);
+        //}
+        //else if (collision.gameObject.CompareTag("Invunerable"))
+        //{
+        //    InvunerabilityControl invunerability = collision.gameObject.GetComponent<InvunerabilityControl>();
+        //    Destroy(collision.gameObject);
 
-            // Если уже есть активная корутина, останавливаем её
-            if (_isInvulnerabilityCoroutine != null)
-            {
-                StopCoroutine(_isInvulnerabilityCoroutine);
-            }
+        //    // Если уже есть активная корутина, останавливаем её
+        //    if (_isInvulnerabilityCoroutine != null)
+        //    {
+        //        StopCoroutine(_isInvulnerabilityCoroutine);
+        //    }
 
-            _isInvulnerable = true; // Устанавливаем неуязвимость
-            _isInvulnerabilityCoroutine = StartCoroutine(InvulnerabilityDuration(invunerability.GetInvunerabilityDuration())); // Запускаем новую корутину
-        }
-        else if (collision.gameObject.CompareTag("MultiShot"))
-        {
-            MultiShootScript multiShootScript = collision.gameObject.GetComponent<MultiShootScript>();
-            Destroy(collision.gameObject);
+        //    _isInvulnerable = true; // Устанавливаем неуязвимость
+        //    _isInvulnerabilityCoroutine = StartCoroutine(InvulnerabilityDuration(invunerability.Duration)); // Запускаем новую корутину
+        //}
+        //else if (collision.gameObject.CompareTag("MultiShot"))
+        //{
+        //    MultiShootScript multiShootScript = collision.gameObject.GetComponent<MultiShootScript>();
+        //    Destroy(collision.gameObject);
 
-            _shipAttack.BulletCount = 2;
-            _isMultiShotActive = true;
-            StartCoroutine(MultiShootDuration(multiShootScript.Duration));
-        }
+        //    _shipAttack.BulletCount = 2;
+        //    _isMultiShotActive = true;
+        //    StartCoroutine(MultiShootDuration(multiShootScript.Duration));
+        //}
     }
-    private IEnumerator MultiShootDuration(float timeDuration)
+
+    //public IEnumerator MultiShootDuration(float timeDuration)
+    //{
+    //    yield return new WaitForSeconds(timeDuration);
+    //    //_isMultiShotActive = false;
+    //    _shipAttack.BulletCount = 1;
+    //}
+    private IEnumerator InvulnerabilityDuration(float timeDuration, AnimatorController invulAnimator)
     {
         //InvulnerableAnimator.SetActive(true);
-        yield return new WaitForSeconds(timeDuration);
-        _isMultiShotActive = false;
-        _shipAttack.BulletCount = 1;
-        //InvulnerableAnimator.SetActive(false);
-    }
-    private IEnumerator InvulnerabilityDuration(float timeDuration)
-    {
-        InvulnerableAnimator.SetActive(true);
+        //invulAnimator.startAn
+
         yield return new WaitForSeconds(timeDuration);
         _isInvulnerable = false;
-        InvulnerableAnimator.SetActive(false);
+        //InvulnerableAnimator.SetActive(false);
     }
 }

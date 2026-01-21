@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4371955138234090790}
   m_Layer: 0
   m_Name: Heal
-  m_TagString: Healthler
+  m_TagString: Support
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7827aff7f9b4774e92c801da2afacd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _duration: 0
   HealthScore: 10
   HealthText: {fileID: 2456822566200908117}
 --- !u!61 &4371955138234090790

@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MultiShootScript : MonoBehaviour
+public class MultiShootScript : SupportControl
 {
-    [SerializeField] private float _duration;
-    public float Duration
+    public override void PickUp(ShipControl ship)
     {
-        get
-        {
-            return _duration;
-        }
+        ship.BulletCount = 2;
+        StartCoroutine(MultiShootDuration(ship, 3f));
+    }
+    private IEnumerator MultiShootDuration(ShipControl ship, float timeDuration)
+    {
+        yield return new WaitForSeconds(timeDuration);
+        //_isMultiShotActive = false;
+        ship.BulletCount = 1;
     }
 }

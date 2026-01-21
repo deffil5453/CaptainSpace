@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5416364757001324477}
   m_Layer: 0
   m_Name: MultiAttack
-  m_TagString: MultiShot
+  m_TagString: Support
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

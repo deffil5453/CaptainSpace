@@ -40,14 +40,13 @@ public class ShipRun : MonoBehaviour
     private void MoveShip()
     {
         Vector3 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        Debug.Log(screenBounds);
+        //Debug.Log(screenBounds);
         float modelWidth = 0.56f; // Установите ширину вашей модели
         float modelHeight = 0.68f;
         _targetPosition.x = Mathf.Clamp(_targetPosition.x, -screenBounds.x + modelWidth, screenBounds.x - modelWidth);
         _targetPosition.y = Mathf.Clamp(_targetPosition.y, -screenBounds.y + modelHeight, screenBounds.y - modelHeight);
 
         transform.position = Vector3.SmoothDamp(transform.position, _targetPosition, ref _currentVelocity, 0.1f, Speed);
-        //transform.position = new Vector3(Mathf.Clamp(_targetPosition.x, -screenBounds.x+modelWidth, screenBounds.x-modelWidth),
-        //                                 Mathf.Clamp(_targetPosition.y, -screenBounds.y+modelHeight, screenBounds.y-modelHeight), _targetPosition.z); // Устанавливаем Z в 0
+        
     }
 }

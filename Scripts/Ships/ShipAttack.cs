@@ -6,10 +6,12 @@ public class ShipAttack : MonoBehaviour
 {
     public GameObject Bullets;
     public int BulletCount = 1;
+    public bool IsPiercing = false;
     [SerializeField] private float _attackSpeed = 0.3f;
     [SerializeField] private float _shipAttack = 10;
-     private float _lengthAttackSpawnBullet = 1f;
+    private float _lengthAttackSpawnBullet = 1f;
     public AudioSource _attackSound;
+    private BulletControl bulletControl;
     public float GetAttack()
     {
         return _shipAttack;
@@ -32,31 +34,15 @@ public class ShipAttack : MonoBehaviour
                 _attackSound.Play();
             }
             if (BulletCount > 1)
-            {
-                float step = _lengthAttackSpawnBullet / (BulletCount-1);
-                print(step);
-                for (int i = 0; i < BulletCount; i++)
-                {
-                    float xOffset = (-_lengthAttackSpawnBullet / 2) + i * step;
-                    print(xOffset);
-                    Vector3 bulletsPosition = transform.position + new Vector3(xOffset, 1, 0);
-                    GameObject bullet = Instantiate(Bullets, bulletsPosition, Quaternion.identity);
-                    BulletControl bulletControl = bullet.GetComponent<BulletControl>();
-                    if (bulletControl != null)
-                    {
-                        bulletControl.SetDamage(_shipAttack);
-                    }
-                }
+            {                
+                //print(step);
+                MultiShot();
             }
             else
             {
                 Vector3 bulletsPosition = transform.position + new Vector3(0, 1, 0);
                 GameObject bullet = Instantiate(Bullets, bulletsPosition, Quaternion.identity);
-                BulletControl bulletControl = bullet.GetComponent<BulletControl>();
-                if (bulletControl != null)
-                {
-                    bulletControl.SetDamage(_shipAttack);
-                }
+                BulletInit(bullet);
             }
             //Vector3 bulletsPosition = transform.position + new Vector3(0, 1, 0);
             //GameObject bullet = Instantiate(Bullets, bulletsPosition, Quaternion.identity);
@@ -68,9 +54,32 @@ public class ShipAttack : MonoBehaviour
             yield return new WaitForSeconds(attackSpeed);
         }
     }
+
+    private void BulletInit(GameObject bullet)
+    {
+        bulletControl = bullet.GetComponent<BulletControl>();
+        if (bulletControl != null)
+        {
+            bulletControl.Inizialize(_shipAttack, IsPiercing);
+        }
+    }
+
+    private void MultiShot()
+    {
+        float step = _lengthAttackSpawnBullet / (BulletCount - 1);
+        for (int i = 0; i < BulletCount; i++)
+        {
+            float xOffset = (-_lengthAttackSpawnBullet / 2) + i * step;
+            //print(xOffset);
+            Vector3 bulletsPosition = transform.position + new Vector3(xOffset, 1, 0);
+            GameObject bullet = Instantiate(Bullets, bulletsPosition, Quaternion.identity);
+            BulletInit(bullet);
+        }
+    }
+
     public void Inizialize(float attack, float attackSpeed)
     {
         _shipAttack = attack;
-        _attackSpeed = attackSpeed;
+        _attackSpeed = 1/attackSpeed;
     }
 }

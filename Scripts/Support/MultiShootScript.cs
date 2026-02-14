@@ -6,13 +6,13 @@ public class MultiShootScript : SupportControl
 {
     public override void PickUp(ShipControl ship)
     {
-        ship.BulletCount = 2;
-        StartCoroutine(MultiShootDuration(ship, 3f));
+        ship.ShipAttack.BulletCount++;
+        ship.StartCoroutine(MultiShootDuration(ship, Duration));
     }
     private IEnumerator MultiShootDuration(ShipControl ship, float timeDuration)
     {
         yield return new WaitForSeconds(timeDuration);
         //_isMultiShotActive = false;
-        ship.BulletCount = 1;
+        ship.ShipAttack.BulletCount--;
     }
 }

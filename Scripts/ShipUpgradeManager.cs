@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,16 +11,20 @@ public class ShipUpgradeManager : MonoBehaviour
     [SerializeField] private TMP_Text _healthText;
     [SerializeField] private TMP_Text _attackText;
     [SerializeField] private TMP_Text _attackSpeedText;
+    [SerializeField] private float _showDuration = 1f;
+    [SerializeField] private CanvasGroup _canvasGroup;
 
     [SerializeField] private Ship _ship;
-    //private void Start()
-    //{
-    //    ScinInfoInizialize();
-    //    Debug.Log(_ship);
-    //    //_healthText = transform.Find("HealthBlock").Find("HealthText").GetComponent<TMP_Text>();
-    //    //_attackText = transform.Find("AttackBlock").Find("AttackText").GetComponent<TMP_Text>();
-    //    //_attackSpeedText = transform.Find("AttackSpeedBlock").Find("AttackSpeedText").GetComponent<TMP_Text>();
-    //}
+    private void Start()
+    {
+        _canvasGroup.alpha = 0f;
+        _canvasGroup.blocksRaycasts = false;
+        //ScinInfoInizialize();
+        //Debug.Log(_ship);
+        //_healthText = transform.Find("HealthBlock").Find("HealthText").GetComponent<TMP_Text>();
+        //_attackText = transform.Find("AttackBlock").Find("AttackText").GetComponent<TMP_Text>();
+        //_attackSpeedText = transform.Find("AttackSpeedBlock").Find("AttackSpeedText").GetComponent<TMP_Text>();
+    }
     private void ScinInfoInizialize()
     {
         _healthText.text = _ship.BaseHealth.ToString();
@@ -36,13 +41,24 @@ public class ShipUpgradeManager : MonoBehaviour
     }
     public void ShowWindow(Ship ship)
     {
+        transform.DOKill();
         gameObject.SetActive(true);
         _ship = ship;
         ScinInfoInizialize();
+        _canvasGroup.DOFade(1f, _showDuration).SetEase(Ease.OutQuad);
+        transform.DOScale(1f, _showDuration).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            _canvasGroup.blocksRaycasts = true; // разрешаем клики после появления
+        });
     }
     public void CloseWindow()
     {
-        gameObject.SetActive(false);
+        _canvasGroup.blocksRaycasts = false;
+        _canvasGroup.DOFade(0f, _showDuration).SetEase(Ease.InQuad);
+        transform.DOScale(0f, _showDuration).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            gameObject.SetActive(false);
+        });
         //_ship = null;
     }
     public void BuyUpHealth()

@@ -195,6 +195,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6215395618169475170, guid: e092378170937ad449d2cd8208198b6e, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8837709824321074680}
+    - targetCorrespondingSourceObject: {fileID: 6215395618169475170, guid: e092378170937ad449d2cd8208198b6e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2832348091769104724}
   m_SourcePrefab: {fileID: 100100000, guid: e092378170937ad449d2cd8208198b6e, type: 3}
 --- !u!4 &8076559989613993026 stripped
 Transform:
@@ -220,8 +223,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   _isInvulnerable: 0
-  InvulnerableAnimator: {fileID: 8331650125614186733}
+  _isMultiShotActive: 0
   Bar: {fileID: 0}
+  _shipAttack: {fileID: 0}
 --- !u!114 &2028351608110219496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullets: {fileID: 3003929554292736530, guid: 2b84d2ef40d44e345b53c36e1154633f, type: 3}
+  BulletCount: 1
   _attackSpeed: 0.25
   _shipAttack: 15
   _attackSound: {fileID: 0}
@@ -511,3 +516,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currenHealth: 0
+--- !u!50 &2832348091769104724
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076559989613993031}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

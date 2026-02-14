@@ -11,12 +11,17 @@ public class ShipControl : MonoBehaviour
     public GameManager GameManager;
 
     [SerializeField] private bool _isInvulnerable;
-    [SerializeField] private bool _isMultiShotActive;
+    //[SerializeField] private bool _isMultiShotActive;
     //public GameObject InvulnerableAnimator;
 
     private ShipHealthSystem _healthSystem;
     public Image Bar;
     [SerializeField] private ShipAttack _shipAttack;
+    public ShipAttack ShipAttack
+    {
+        get { return _shipAttack; }
+        set { _shipAttack = value; }
+    }
     public bool IsInvul
     {
         get
@@ -28,27 +33,28 @@ public class ShipControl : MonoBehaviour
             _isInvulnerable = value;
         }
     }
-    public int BulletCount
-    {
-        get
-        {
-            return _shipAttack.BulletCount;
-        }
-        set
-        {
-            _shipAttack.BulletCount = value;
-        }
-    }
+    //public int BulletCount
+    //{
+    //    get
+    //    {
+    //        return _shipAttack.BulletCount;
+    //    }
+    //    set
+    //    {
+    //        _shipAttack.BulletCount = value;
+    //    }
+    //}
     private void Start()
     {
         _shipAttack = GetComponent<ShipAttack>();
         _healthSystem = GetComponent<ShipHealthSystem>();
-        GameManager = FindFirstObjectByType<GameManager>();
+        //GameManager = FindFirstObjectByType<GameManager>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log(collision.gameObject);
             EnemyControl enemyControl = collision.gameObject.GetComponent<EnemyControl>();
             if (!_isInvulnerable)
             {

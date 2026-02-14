@@ -21,8 +21,7 @@ public class SupportManager : MonoBehaviour
         }
     }
     public void SupportActive(GameObject support, ShipControl ship)
-    {
-        
+    {        
         _supportControl = support.GetComponent<SupportControl>();
         _supportControl.PickUp(ship);
     }

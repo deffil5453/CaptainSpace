@@ -11,6 +11,10 @@ public class ShipUpgradeManager : MonoBehaviour
     [SerializeField] private TMP_Text _healthText;
     [SerializeField] private TMP_Text _attackText;
     [SerializeField] private TMP_Text _attackSpeedText;
+    [Space(10)]
+    [SerializeField] private TMP_Text _healthPriceText;
+    [SerializeField] private TMP_Text _attackPriceText;
+    [SerializeField] private TMP_Text _attackSpeedPriceText;
     [SerializeField] private float _showDuration = 1f;
     [SerializeField] private CanvasGroup _canvasGroup;
 
@@ -30,6 +34,7 @@ public class ShipUpgradeManager : MonoBehaviour
         _healthText.text = _ship.BaseHealth.ToString();
         _attackText.text = _ship.BaseAttack.ToString();
 
+
         if (YG2.envir.language == "ru")
         {
             _attackSpeedText.text = _ship.BaseAttackSpeed.ToString() + "/с";
@@ -38,13 +43,18 @@ public class ShipUpgradeManager : MonoBehaviour
         {
             _attackSpeedText.text = _ship.BaseAttackSpeed.ToString() + "/s";
         }
+        _healthPriceText.text = "÷ена: "+_ship.PriceUpHealth.ToString();
+        _attackPriceText.text ="÷ена: "+ _ship.PriceUpAttack.ToString();
+        _attackSpeedPriceText.text ="÷ена: "+ _ship.PriceUpAttackSpeed.ToString();
     }
     public void ShowWindow(Ship ship)
     {
         transform.DOKill();
-        gameObject.SetActive(true);
+        _canvasGroup.DOKill();
         _ship = ship;
         ScinInfoInizialize();
+        gameObject.SetActive(true);
+        transform.localScale = Vector3.zero;
         _canvasGroup.DOFade(1f, _showDuration).SetEase(Ease.OutQuad);
         transform.DOScale(1f, _showDuration).SetEase(Ease.OutBack).OnComplete(() =>
         {
@@ -53,6 +63,7 @@ public class ShipUpgradeManager : MonoBehaviour
     }
     public void CloseWindow()
     {
+        SoundManager.Instance.PlaySound(SoundType.UIClick);
         _canvasGroup.blocksRaycasts = false;
         _canvasGroup.DOFade(0f, _showDuration).SetEase(Ease.InQuad);
         transform.DOScale(0f, _showDuration).SetEase(Ease.InBack).OnComplete(() =>

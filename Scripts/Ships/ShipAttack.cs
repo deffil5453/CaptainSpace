@@ -10,7 +10,7 @@ public class ShipAttack : MonoBehaviour
     [SerializeField] private float _attackSpeed = 0.3f;
     [SerializeField] private float _shipAttack = 10;
     private float _lengthAttackSpawnBullet = 1f;
-    public AudioSource _attackSound;
+    //public AudioSource _attackSound;
     private BulletControl bulletControl;
     public float GetAttack()
     {
@@ -22,17 +22,19 @@ public class ShipAttack : MonoBehaviour
     }
     private void Start()
     {
-        _attackSound = GetComponent<AudioSource>();
+        //_attackSound = GetComponent<AudioSource>();
         StartCoroutine(SpaceShipAttack(_attackSpeed));
     }
     private IEnumerator SpaceShipAttack(float attackSpeed)
     {
         while (true)
         {
-            if (_attackSound != null)
-            {
-                _attackSound.Play();
-            }
+            //if (_attackSound != null)
+            //{
+            //    _attackSound.Play();
+            //}
+            //SoundManager.Instance.SpaceShipAttackAudio();
+            SoundManager.Instance.PlaySound(SoundType.ShipAttack);
             if (BulletCount > 1)
             {                
                 //print(step);

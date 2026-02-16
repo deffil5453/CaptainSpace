@@ -49,11 +49,13 @@ public class MenuManager : MonoBehaviour
     }
     public void StartGame()
     {
+        SoundManager.Instance.PlaySound(SoundType.UIClick);
         YG2.InterstitialAdvShow();
         SceneManager.LoadScene("Game");
     }
     public void BackToMenu()
     {
+        SoundManager.Instance.PlaySound(SoundType.UIClick);
         YG2.InterstitialAdvShow();
         SceneManager.LoadScene("Menu");
     }

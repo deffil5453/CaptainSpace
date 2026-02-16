@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 8164858156288453136, guid: 380a366d660fd7f4c9bd1340ff3c70d6, type: 3}
   BaseHealth: 150
-  BaseAttack: 7
+  BaseAttack: 40
   BaseAttackSpeed: 2
+  MaxHealth: 500
+  MaxAttack: 100
+  MaxAttackSpeed: 6
   CurrentHealthLevel: 10
   CurrentAttackLevel: 10
   CurrentAttackSpeedLevel: 10
   MaxLevel: 1
-  HealthMultiplier: 0.05
-  AttackMultiplier: 0.1
-  AttackSpeedhMultiplier: 0.05
   Price: 1500
   State: 0
   PriceUpHealth: 125

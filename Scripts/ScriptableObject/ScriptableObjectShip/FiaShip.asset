@@ -16,13 +16,13 @@ MonoBehaviour:
   BaseHealth: 200
   BaseAttack: 20
   BaseAttackSpeed: 0.5
+  MaxHealth: 600
+  MaxAttack: 150
+  MaxAttackSpeed: 4
   CurrentHealthLevel: 10
   CurrentAttackLevel: 10
   CurrentAttackSpeedLevel: 10
   MaxLevel: 1
-  HealthMultiplier: 0.05
-  AttackMultiplier: 0.1
-  AttackSpeedhMultiplier: 0.05
   Price: 2500
   State: 0
   PriceUpHealth: 200

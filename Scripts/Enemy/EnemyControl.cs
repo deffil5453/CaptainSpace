@@ -22,7 +22,7 @@ public class EnemyControl : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (_isDead) { return; }
-        
+
         _currentHealth -= damage;
         StartCoroutine(HandleTakeAttack(0.2f));
         if (_currentHealth <= 0)
@@ -42,12 +42,14 @@ public class EnemyControl : MonoBehaviour
         GameManager gameManager = FindAnyObjectByType<GameManager>();
         gameManager.AddScore(_enemyLevel);
         _isDead = true;
-        StartCoroutine(HandleDeath());
+        SoundManager.Instance.EnemyDeadAudio();
+        Destroy(gameObject);
+        //StartCoroutine(HandleDeath());
 
     }
     private IEnumerator HandleTakeAttack(float time)
     {
-        _sprite.color = new Color(172f,0f,0f);
+        _sprite.color = new Color(172f, 0f, 0f);
         yield return new WaitForSeconds(time);
         _sprite.color = Color.white;
     }
@@ -65,8 +67,11 @@ public class EnemyControl : MonoBehaviour
             // ”ничтожаем объект звука после завершени€ воспроизведени€
             Destroy(soundObject, DeadSound.length);
         }
-        Instantiate(DestroyEffect, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(DestroyEffect.main.duration);
+    }
+    private void OnDestroy()
+    {
+        Instantiate(DestroyEffect, transform.position, Quaternion.identity);
     }
     private void OnApplicationPause(bool pause)
     {

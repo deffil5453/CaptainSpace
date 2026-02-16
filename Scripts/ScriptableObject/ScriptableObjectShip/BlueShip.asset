@@ -16,6 +16,9 @@ MonoBehaviour:
   BaseHealth: 100
   BaseAttack: 25
   BaseAttackSpeed: 2
+  MaxHealth: 300
+  MaxAttack: 60
+  MaxAttackSpeed: 8
   CurrentHealthLevel: 2
   CurrentAttackLevel: 2
   CurrentAttackSpeedLevel: 2

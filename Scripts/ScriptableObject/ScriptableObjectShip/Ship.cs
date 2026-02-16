@@ -9,6 +9,9 @@ public class Ship : ScriptableObject
     public float BaseHealth;
     public float BaseAttack;
     public float BaseAttackSpeed;
+    public float MaxHealth;
+    public float MaxAttack;
+    public float MaxAttackSpeed;
     public int CurrentHealthLevel;
     public int CurrentAttackLevel;
     public int CurrentAttackSpeedLevel;

@@ -46,6 +46,10 @@ public class MenuManager : MonoBehaviour
     private void Update()
     {
         //LoadBuySkin();
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            UpdateMoney(1000);
+        }
     }
     public void StartGame()
     {

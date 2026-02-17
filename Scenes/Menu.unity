@@ -122,6 +122,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &10152739 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1692065262493439222, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+  m_PrefabInstance: {fileID: 669294885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &57785126
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +393,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d03d6a812ad6e48b6b5d82c3f21e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthText: {fileID: 0}
+  _attackText: {fileID: 0}
+  _attackSpeedText: {fileID: 0}
+  _imageFillHealth: {fileID: 0}
+  _imageFillAttack: {fileID: 0}
+  _imageFillAttackSpeed: {fileID: 0}
+  _healthPriceText: {fileID: 0}
+  _attackPriceText: {fileID: 0}
+  _attackSpeedPriceText: {fileID: 0}
   _showDuration: 1
   _canvasGroup: {fileID: 118411248}
   _ship: {fileID: 0}
@@ -869,7 +889,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7395111, y: 0.16363764}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 7.7597027, y: -0.13500977}
+  m_AnchoredPosition: {x: 7.7597046, y: -0.13500977}
   m_SizeDelta: {x: 15.53, y: 0.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &228191345
@@ -2265,6 +2285,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -86.00001
       objectReference: {fileID: 0}
+    - target: {fileID: 1745862386799531266, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: _attackText
+      value: 
+      objectReference: {fileID: 10152739}
+    - target: {fileID: 1745862386799531266, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: _showDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897339066054716806, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 15.199982
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219202612138113633, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: en
+      value: Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219202612138113633, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: ru
+      value: "\u0410\u0442\u0430\u043A\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219202612138113633, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: processTranslateLabel
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5903308775294992314, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -127
@@ -2272,6 +2316,10 @@ PrefabInstance:
     - target: {fileID: 5903308775294992314, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -86
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564101733954943984, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 12.899994
       objectReference: {fileID: 0}
     - target: {fileID: 7608594998799817167, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
       propertyPath: m_Pivot.x
@@ -2353,9 +2401,39 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7802851543373850085, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: en
+      value: 'Attack Speed
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802851543373850085, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: ru
+      value: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C\n\u0430\u0442\u0430\u043A\u0438"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802851543373850085, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: countLang
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802851543373850085, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: textHeight
+      value: 124
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802851543373850085, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: componentTextField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802851543373850085, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: processTranslateLabel
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7914335021236103587, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
       propertyPath: m_Name
       value: ScinWindowUpgrade (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914335021236103587, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8488121127116677182, guid: 04a08fa340ddab849b80987ad46c4eea, type: 3}
       propertyPath: m_AnchoredPosition.x

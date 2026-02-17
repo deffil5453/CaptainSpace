@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using YG;
 
 public class ShipUpgradeManager : MonoBehaviour
@@ -11,6 +12,11 @@ public class ShipUpgradeManager : MonoBehaviour
     [SerializeField] private TMP_Text _healthText;
     [SerializeField] private TMP_Text _attackText;
     [SerializeField] private TMP_Text _attackSpeedText;
+    [Space(10)]
+    [Header("Полоски параметров")]
+    [SerializeField] private Image _imageFillHealth;
+    [SerializeField] private Image _imageFillAttack;
+    [SerializeField] private Image _imageFillAttackSpeed;
     [Space(10)]
     [SerializeField] private TMP_Text _healthPriceText;
     [SerializeField] private TMP_Text _attackPriceText;
@@ -46,6 +52,10 @@ public class ShipUpgradeManager : MonoBehaviour
         _healthPriceText.text = "Цена: "+_ship.PriceUpHealth.ToString();
         _attackPriceText.text ="Цена: "+ _ship.PriceUpAttack.ToString();
         _attackSpeedPriceText.text ="Цена: "+ _ship.PriceUpAttackSpeed.ToString();
+
+        _imageFillHealth.fillAmount = _ship.BaseHealth/_ship.MaxHealth;
+        _imageFillAttack.fillAmount = _ship.BaseAttack / _ship.MaxAttack;
+        _imageFillAttackSpeed.fillAmount = _ship.BaseAttackSpeed / _ship.MaxAttackSpeed;
     }
     public void ShowWindow(Ship ship)
     {
@@ -55,7 +65,7 @@ public class ShipUpgradeManager : MonoBehaviour
         ScinInfoInizialize();
         gameObject.SetActive(true);
         transform.localScale = Vector3.zero;
-        _canvasGroup.DOFade(1f, _showDuration).SetEase(Ease.OutQuad);
+        _canvasGroup.DOFade(1f, _showDuration).SetEase(Ease.OutExpo);
         transform.DOScale(1f, _showDuration).SetEase(Ease.OutBack).OnComplete(() =>
         {
             _canvasGroup.blocksRaycasts = true; // разрешаем клики после появления

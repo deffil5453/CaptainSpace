@@ -15,7 +15,7 @@ public class ShipControl : MonoBehaviour
     //public GameObject InvulnerableAnimator;
 
     private ShipHealthSystem _healthSystem;
-    public Image Bar;
+    //public Image Bar;
     [SerializeField] private ShipAttack _shipAttack;
     public ShipAttack ShipAttack
     {
@@ -58,7 +58,7 @@ public class ShipControl : MonoBehaviour
             EnemyControl enemyControl = collision.gameObject.GetComponent<EnemyControl>();
             if (!_isInvulnerable)
             {
-                StartCoroutine(_healthSystem.ChangeHealth(-10f, 0.1f, Bar));
+                StartCoroutine(_healthSystem.ChangeHealth(-10f, 0.1f));
                 if (_healthSystem.GetHealth() <= 0)
                 {
                     GameManager.PlayerDead();

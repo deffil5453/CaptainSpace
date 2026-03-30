@@ -223,9 +223,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   _isInvulnerable: 0
-  _isMultiShotActive: 0
   Bar: {fileID: 0}
-  _shipAttack: {fileID: 0}
+  _shipAttack: {fileID: 4389485347035419203}
 --- !u!114 &2028351608110219496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,9 +252,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullets: {fileID: 3003929554292736530, guid: 2b84d2ef40d44e345b53c36e1154633f, type: 3}
   BulletCount: 1
+  IsPiercing: 0
   _attackSpeed: 0.25
   _shipAttack: 15
-  _attackSound: {fileID: 0}
 --- !u!82 &389400995703925152
 AudioSource:
   m_ObjectHideFlags: 0

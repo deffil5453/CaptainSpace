@@ -17,7 +17,8 @@ public class EnemySpawn : MonoBehaviour
     {
         int randomNumberEnemies = Random.Range(0, Enemies.Length);
         float randomSpawnPosition = Random.Range(_minXSpawnPosition, _maxXSpawnPosition);
-        Vector3 spawnPosition = transform.position + new Vector3(randomSpawnPosition, 0f, 100f);
+        Vector3 spawnPosition = transform.position + new Vector3(randomSpawnPosition, 0f, 0f);
+        
         GameObject enemy = Instantiate(Enemies[randomNumberEnemies], spawnPosition, Quaternion.identity);
         enemy.GetComponent<EnemyControl>().DestroyEffect = DestroyEffect;
         Invoke("Spawn", Random.Range(_minSpawnDelay, _maxSpawnDelay));

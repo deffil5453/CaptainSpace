@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Inventory
   m_EditorClassIdentifier: 
   Coins: 0
-  CurrentShipPrefab: {fileID: 8076559989613993031, guid: f58b83d948bcd1f40aff4bd545130717, type: 3}
+  CurrentShip: {fileID: 11400000, guid: bbfd2f6cbbeda1a46b72aaaf04a5fab3, type: 2}

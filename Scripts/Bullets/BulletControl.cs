@@ -24,7 +24,7 @@ public class BulletControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && !_alreadyHit.Contains(collision.gameObject))
         {
-            Debug.Log(collision.gameObject.name);
+            //Debug.Log(collision.gameObject.name);
             EnemyControl enemyControl = collision.gameObject.GetComponent<EnemyControl>();
             if (enemyControl != null)
             {

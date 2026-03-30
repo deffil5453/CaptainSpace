@@ -107,3 +107,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 7
+  _icon: {fileID: 3584471663967773675}
+--- !u!212 &3584471663967773675 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2075514570545650747, guid: 652b31334f88865488a5889e3632cde7, type: 3}
+  m_PrefabInstance: {fileID: 3275010273467301840}
+  m_PrefabAsset: {fileID: 0}

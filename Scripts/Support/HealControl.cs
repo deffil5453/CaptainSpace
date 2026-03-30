@@ -30,6 +30,7 @@ public class HealControl : SupportControl
 
     public override void PickUp(ShipControl ship)
     {
-        
+        AddHealEvent.AddHealth(HealthScore);
+        PickupEvent();
     }
 }

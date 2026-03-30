@@ -8,6 +8,7 @@ public class ShowPopupManagerScript : MonoBehaviour
     public void InfoShipWindow(Ship ship)
     {
         SoundManager.Instance.PlaySound(SoundType.UIClick);
-        _shipUpgradeManager.ShowWindow(ship);
+        ShipModel shipModel = SaveShip.LoadShipData(ship);
+        _shipUpgradeManager.ShowWindow(shipModel);
     }
 }

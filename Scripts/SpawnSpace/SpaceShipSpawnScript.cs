@@ -13,14 +13,16 @@ public class SpaceShipSpawnScript : MonoBehaviour
     }
     private void Spawn()
     {
+        ShipModel shipModel = SaveShip.LoadShipData(_inventory.CurrentShip);
         _gameObjectSpaceShip = Instantiate(_inventory.CurrentShip.Prefab, _spawnTransform.position, Quaternion.identity);
         _gameObjectSpaceShip
             .GetComponent<ShipHealthSystem>()
-            .Inizialize(_inventory.CurrentShip.BaseHealth);
+            .Inizialize(shipModel.CurrentHealth);
+        _gameObjectSpaceShip.GetComponent<ShipHealthSystem>().Bar = _healthBar;
         _gameObjectSpaceShip
             .GetComponent<ShipAttack>()
-            .Inizialize(_inventory.CurrentShip.BaseAttack, _inventory.CurrentShip.BaseAttackSpeed);
-        _gameObjectSpaceShip.GetComponent<ShipControl>().Bar = _healthBar;
+            .Inizialize(shipModel.CurrentAttack, shipModel.CurrentAttackSpeed);
+        //_gameObjectSpaceShip.GetComponent<ShipControl>().Bar = _healthBar;
         //_gameObjectSpaceShip.GetComponent<ShipRun>().Inizialize(_inventory.CurrentShip.);
     }
 }

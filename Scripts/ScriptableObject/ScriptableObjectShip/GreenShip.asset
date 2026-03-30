@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f6881e4e4d6b04f83bb23a89236d8d, type: 3}
   m_Name: GreenShip
   m_EditorClassIdentifier: 
+  Key: GreenShip
   Prefab: {fileID: 8164858156288453136, guid: 380a366d660fd7f4c9bd1340ff3c70d6, type: 3}
   BaseHealth: 150
-  BaseAttack: 40
-  BaseAttackSpeed: 2
-  MaxHealth: 500
-  MaxAttack: 100
-  MaxAttackSpeed: 6
-  CurrentHealthLevel: 10
-  CurrentAttackLevel: 10
-  CurrentAttackSpeedLevel: 10
-  MaxLevel: 1
+  BaseAttack: 10
+  BaseAttackSpeed: 1
+  CurrentHealthLevel: 1
+  CurrentAttackLevel: 1
+  CurrentAttackSpeedLevel: 1
+  StepHealthUpgrade: 15
+  StepAttackUpgrade: 2
+  StepAttackSpeedUpgrade: 0.2
+  MaxLevel: 20
   Price: 1500
   State: 0
-  PriceUpHealth: 125
-  PriceUpAttack: 125
-  PriceUpAttackSpeed: 125
+  PriceUpHealth: 130
+  PriceUpAttack: 130
+  PriceUpAttackSpeed: 130
+  StepPriceMultiplier: 8

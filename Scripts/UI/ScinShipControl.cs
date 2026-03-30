@@ -61,22 +61,26 @@ public class ScinShipControl : MonoBehaviour
     {
         if (isBuy)
         {
-            Debug.Log(MenuManager.TotalMoney);
-            if (MenuManager.TotalMoney < Price)
+            //Debug.Log(MenuManager.TotalMoney);
+            //if (MenuManager.TotalMoney < Price)
+            //{
+            //    return;
+            //}
+            if (!Wallet.Instance.Spend(Price))
             {
                 return;
             }
             _buyButton.gameObject.SetActive(false);
             _selectedButton.gameObject.SetActive(true);
             _selectedButton.interactable = true;
-            _selectedButton.gameObject.GetComponent<Animator>().enabled = true;
+            //_selectedButton.gameObject.GetComponent<Animator>().enabled = true;
             _selectedButton.gameObject.GetComponentInChildren<TMP_Text>().text = "выбрать";
             _ship.State = ShipState.Buyed;
-            MenuManager.TotalMoney -= Price;
-            _inventory.Coins -= MenuManager.TotalMoney;
-            PlayerPrefs.SetInt("PlayerMoney", MenuManager.TotalMoney);
-            MenuManagerScene.UpdateMoneyText();
-            PlayerPrefs.Save();
+            //MenuManager.TotalMoney -= Price;
+            //_inventory.Coins -= MenuManager.TotalMoney;
+            //PlayerPrefs.SetInt("PlayerMoney", MenuManager.TotalMoney);
+            //MenuManagerScene.UpdateMoneyText();
+            //PlayerPrefs.Save();
         }
         else
         {

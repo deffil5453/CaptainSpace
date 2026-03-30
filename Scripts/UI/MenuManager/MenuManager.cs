@@ -1,3 +1,4 @@
+using DG.Tweening;
 using EnumStateShip;
 using System.Collections.Generic;
 using TMPro;
@@ -11,7 +12,7 @@ public class MenuManager : MonoBehaviour
     public static MenuManager instance;
     [SerializeField] private TMP_Text _totalMoneyText;
     [SerializeField] private TMP_Text _maxScoreText;
-    public static int TotalMoney = 0;
+    private int _oldMoney;
     public List<ScinShipControl> Skins;
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class MenuManager : MonoBehaviour
             Destroy(gameObject);
         }
         Skins = new List<ScinShipControl>(FindObjectsOfType<ScinShipControl>());
+        _oldMoney = 0;
     }
     private void Start()
     {
@@ -37,18 +39,15 @@ public class MenuManager : MonoBehaviour
         }
 
 
-        //PlayerPrefs.DeleteAll();
+        Wallet.Instance.OnMoneyChanged += UpdateMoney;
         LoadMoney();
-        EventsManager.UpEvent += UpdateMoney;
-        //LoadBuySkin();
-
     }
     private void Update()
     {
         //LoadBuySkin();
         if (Input.GetKeyDown(KeyCode.M))
         {
-            UpdateMoney(1000);
+            Wallet.Instance.Add(1000);
         }
     }
     public void StartGame()
@@ -65,32 +64,21 @@ public class MenuManager : MonoBehaviour
     }
     public void LoadMoney()
     {
-        Debug.Log(PlayerPrefs.GetInt("PlayerMoney", 0));
-        Debug.Log(TotalMoney);
-        TotalMoney = PlayerPrefs.GetInt("PlayerMoney", 0);
         //TotalMoney = 1000;
-        UpdateMoneyText();
+        UpdateMoney(0, Wallet.Instance.Money);
     }
 
-    public void UpdateMoneyText()
-    {
-        _totalMoneyText.text = TotalMoney.ToString();
-    }
     public void AdvRewardMoney()
     {
-        YG2.RewardedAdvShow("1", () =>
-        {
-            UpdateMoney(50);
-
-        });
+        RewardManager.Instance.AdvRewardMoney(50);
     }
-    private void UpdateMoney(int value)
+    private void UpdateMoney(int minvalue, int maxValue)
     {
-        TotalMoney += value;
-        PlayerPrefs.SetInt("PlayerMoney", TotalMoney);
-        PlayerPrefs.Save();
-        Debug.Log(PlayerPrefs.GetInt("PlayerMoney"));
-        UpdateMoneyText();
+        DOTween.To(() => minvalue, x =>
+        {
+            _totalMoneyText.text = x.ToString();
+            _oldMoney = x;
+        }, maxValue, 0.5f);
     }
     public void ResetShip()
     {
@@ -102,51 +90,18 @@ public class MenuManager : MonoBehaviour
             }
         }
     }
-    private void LoadBuySkin()
-    {
-        if (Skins.Count <= 1)
-        {
-            return;
-        }
-        //for (int i = 0; i < Skins.Count; i++)
-        //{
-
-        //    if (PlayerPrefs.GetInt(Skins[i].Sprite + "IsBuy") == i)
-        //    {
-        //        Skins[i].IsBuy = true;
-        //    }
-
-        //    if (Skins[i].IsBuy)
-        //    {
-        //        Skins[i].BuyButton.gameObject.SetActive(false);
-        //        Skins[i].SelectedButton.gameObject.SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        Skins[i].BuyButton.gameObject.SetActive(true);
-        //        Skins[i].SelectedButton.gameObject.SetActive(false);
-        //    }
-
-        //    if (PlayerPrefs.GetInt("IsSelected") == i)
-        //    {
-        //        Skins[i].IsSelected = true;
-        //        Skins[i].SelectedButton.gameObject.SetActive(false);
-        //    }
-        //    //else
-        //    //{
-        //    //    Skins[i].IsSelected = false;
-        //    //    Skins[i].SelectedButton.gameObject.SetActive(true);
-        //    //}
-        //}
-    }
     private void OnDestroy()
     {
-        EventsManager.UpEvent -= UpdateMoney;
+        Wallet.Instance.OnMoneyChanged -= UpdateMoney;
     }
     public void DeleteAllSaves()
     {
         PlayerPrefs.DeleteAll();
         RestartScene();
+    }
+    public void ExitGame()
+    {
+        Application.Quit(); 
     }
     private void RestartScene()
     {

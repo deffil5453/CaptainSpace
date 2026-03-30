@@ -7,6 +7,7 @@ public class ShipHealthSystem : MonoBehaviour
 {
     [SerializeField] private float _currenHealth;
     private float _maxHealth;
+    public Image Bar;
     public float GetHealth()
     {
         return _currenHealth;
@@ -14,8 +15,9 @@ public class ShipHealthSystem : MonoBehaviour
     private void Start()
     {
         _maxHealth = _currenHealth;
+        AddHealEvent.OnHealthChanged += SetHealth;
     }
-    public IEnumerator ChangeHealth(float amount, float duration, Image HealthBar)
+    public IEnumerator ChangeHealth(float amount, float duration)
     {
         // Устанавливаем целевое здоровье, ограничивая его от 0 до 100
         float targetHealth = Mathf.Clamp(_currenHealth + amount, 0f, _maxHealth);
@@ -27,25 +29,27 @@ public class ShipHealthSystem : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             _currenHealth = Mathf.Lerp(_currenHealth, targetHealth, elapsed / duration);
-            HealthBar.fillAmount = _currenHealth / _maxHealth; // Обновляем полосу здоровья
+            Bar.fillAmount = _currenHealth / _maxHealth; // Обновляем полосу здоровья
             yield return null; // Ждем следующего кадра
         }
 
         // Устанавливаем окончательное значение здоровья
         _currenHealth = targetHealth;
-        HealthBar.fillAmount = _currenHealth / _maxHealth; // Обновляем полосу здоровья в конце
+        Bar.fillAmount = _currenHealth / _maxHealth; // Обновляем полосу здоровья в конце
         // Проверяем, если здоровье меньше или равно 0, вызываем PlayerDead
         if (_currenHealth<=0)
         {
             GameManager.instance.PlayerDead();
         }
-
     }
-    public void SetHealth()
+    public void SetHealth(float amount)
     {
-        _currenHealth = 100f;
+        StartCoroutine(ChangeHealth(amount, 0.1f));
     }
-
+    private void OnDestroy()
+    {
+        AddHealEvent.OnHealthChanged -= SetHealth;
+    }
     public void Inizialize(float currenHealth)
     {
         _currenHealth = currenHealth;

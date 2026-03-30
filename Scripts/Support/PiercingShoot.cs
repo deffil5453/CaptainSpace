@@ -7,6 +7,7 @@ public class PiercingShoot : SupportControl
     public override void PickUp(ShipControl ship)
     {
         ship.StartCoroutine(PiercingShootDuration(ship, Duration));
+        PickupEvent();
     }
     private IEnumerator PiercingShootDuration(ShipControl ship, float timeDuration)
     {

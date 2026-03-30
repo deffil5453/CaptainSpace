@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f6881e4e4d6b04f83bb23a89236d8d, type: 3}
   m_Name: FiaShip
   m_EditorClassIdentifier: 
+  Key: FiaShip
   Prefab: {fileID: 6097491702223864399, guid: e72e85d5dc149014793b39038b8d3659, type: 3}
   BaseHealth: 200
-  BaseAttack: 20
-  BaseAttackSpeed: 0.5
-  MaxHealth: 600
-  MaxAttack: 150
-  MaxAttackSpeed: 4
-  CurrentHealthLevel: 10
-  CurrentAttackLevel: 10
-  CurrentAttackSpeedLevel: 10
-  MaxLevel: 1
+  BaseAttack: 15
+  BaseAttackSpeed: 1
+  CurrentHealthLevel: 1
+  CurrentAttackLevel: 1
+  CurrentAttackSpeedLevel: 1
+  StepHealthUpgrade: 20
+  StepAttackUpgrade: 3
+  StepAttackSpeedUpgrade: 0.1
+  MaxLevel: 20
   Price: 2500
   State: 0
   PriceUpHealth: 200
   PriceUpAttack: 200
   PriceUpAttackSpeed: 200
+  StepPriceMultiplier: 10

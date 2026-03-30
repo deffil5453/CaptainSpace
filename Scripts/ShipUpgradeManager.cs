@@ -1,13 +1,16 @@
 using DG.Tweening;
+using EnumStateShip;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
+using YG.Example.DemoScene;
 
 public class ShipUpgradeManager : MonoBehaviour
 {
+    [SerializeField] private ShipModel _shipModel;
     [Header("Информация о корабле")]
     [SerializeField] private TMP_Text _healthText;
     [SerializeField] private TMP_Text _attackText;
@@ -18,51 +21,54 @@ public class ShipUpgradeManager : MonoBehaviour
     [SerializeField] private Image _imageFillAttack;
     [SerializeField] private Image _imageFillAttackSpeed;
     [Space(10)]
+    [Header("Цена")]
     [SerializeField] private TMP_Text _healthPriceText;
     [SerializeField] private TMP_Text _attackPriceText;
     [SerializeField] private TMP_Text _attackSpeedPriceText;
+    [Space(10)]
+    [Header("Кнопки")]
+    [SerializeField] private Button _upgradeHealthButton;
+    [SerializeField] private Button _upgradeAttackButton;
+    [SerializeField] private Button _upgradeAttackSpeedButton;
+
     [SerializeField] private float _showDuration = 1f;
     [SerializeField] private CanvasGroup _canvasGroup;
 
-    [SerializeField] private Ship _ship;
     private void Start()
     {
         _canvasGroup.alpha = 0f;
         _canvasGroup.blocksRaycasts = false;
-        //ScinInfoInizialize();
-        //Debug.Log(_ship);
-        //_healthText = transform.Find("HealthBlock").Find("HealthText").GetComponent<TMP_Text>();
-        //_attackText = transform.Find("AttackBlock").Find("AttackText").GetComponent<TMP_Text>();
-        //_attackSpeedText = transform.Find("AttackSpeedBlock").Find("AttackSpeedText").GetComponent<TMP_Text>();
+        //ScinInfoInizialize();     
     }
-    private void ScinInfoInizialize()
+    private void UpdateUI()
     {
-        _healthText.text = _ship.BaseHealth.ToString();
-        _attackText.text = _ship.BaseAttack.ToString();
-
+        _healthText.text = _shipModel.CurrentHealth.ToString();
+        _attackText.text = _shipModel.CurrentAttack.ToString();
 
         if (YG2.envir.language == "ru")
         {
-            _attackSpeedText.text = _ship.BaseAttackSpeed.ToString() + "/с";
+            _attackSpeedText.text = _shipModel.CurrentAttackSpeed.ToString() + "/с";
         }
         else
         {
-            _attackSpeedText.text = _ship.BaseAttackSpeed.ToString() + "/s";
+            _attackSpeedText.text = _shipModel.CurrentAttackSpeed.ToString("F1") + "/s";
         }
-        _healthPriceText.text = "Цена: "+_ship.PriceUpHealth.ToString();
-        _attackPriceText.text ="Цена: "+ _ship.PriceUpAttack.ToString();
-        _attackSpeedPriceText.text ="Цена: "+ _ship.PriceUpAttackSpeed.ToString();
+        _healthPriceText.text = "Цена: " + _shipModel.GetHealthPrice().ToString();
+        _attackPriceText.text = "Цена: " + _shipModel.GetAttackPrice().ToString();
+        _attackSpeedPriceText.text = "Цена: " + _shipModel.GetAttackSpeedPrice().ToString();
 
-        _imageFillHealth.fillAmount = _ship.BaseHealth/_ship.MaxHealth;
-        _imageFillAttack.fillAmount = _ship.BaseAttack / _ship.MaxAttack;
-        _imageFillAttackSpeed.fillAmount = _ship.BaseAttackSpeed / _ship.MaxAttackSpeed;
+        _imageFillHealth.fillAmount = _shipModel.HealthFillAmount;
+        _imageFillAttack.fillAmount = _shipModel.AttackFillAmount;
+        _imageFillAttackSpeed.fillAmount = _shipModel.AttackSpeedFillAmount;
+
     }
-    public void ShowWindow(Ship ship)
+    public void ShowWindow(ShipModel shipModel)
     {
         transform.DOKill();
         _canvasGroup.DOKill();
-        _ship = ship;
-        ScinInfoInizialize();
+        _shipModel = shipModel;
+        UpdateUI();
+        LoadButton(shipModel.Ship.State);
         gameObject.SetActive(true);
         transform.localScale = Vector3.zero;
         _canvasGroup.DOFade(1f, _showDuration).SetEase(Ease.OutExpo);
@@ -80,37 +86,88 @@ public class ShipUpgradeManager : MonoBehaviour
         {
             gameObject.SetActive(false);
         });
-        //_ship = null;
+    }
+    private void LoadButton(ShipState state)
+    {
+        if (state == ShipState.ReadyToBuy)
+        {
+            _upgradeHealthButton.gameObject.SetActive(false);
+            _upgradeAttackButton.gameObject.SetActive(false);
+            _upgradeAttackSpeedButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            _upgradeHealthButton.gameObject.SetActive(true);
+            _upgradeAttackButton.gameObject.SetActive(true);
+            _upgradeAttackSpeedButton.gameObject.SetActive(true);
+        }
     }
     public void BuyUpHealth()
     {
-        if (MenuManager.TotalMoney < _ship.PriceUpHealth)
+        if (!Wallet.Instance.Spend(_shipModel.GetHealthPrice()))
+        {
+            return;
+        }
+        float oldHealth = _shipModel.CurrentHealth;
+        int oldPrice = _shipModel.GetHealthPrice();
+        _shipModel.Upgradehealth();
+        SaveShip.SaveShipData(_shipModel);
+        float newPrice = _shipModel.GetHealthPrice();
+        DOTween.To(() => oldPrice, x =>
+        {
+            _healthPriceText.text = "Цена: " + x.ToString("F0");
+        }, newPrice, 0.5f);
+        DOTween.To(() => oldHealth, x =>
+        {
+            _healthText.text = Mathf.RoundToInt(x).ToString();
+            _imageFillHealth.fillAmount = x / _shipModel.MaxHealth;
+        }, _shipModel.CurrentHealth, 0.5f);
+        UpdateUI();
+
+    }
+    public void BuyUpAttack()
+    {
+        if (!Wallet.Instance.Spend(_shipModel.GetAttackPrice()))
+        {
+            return;
+        }
+        float oldAttack = _shipModel.CurrentAttack;
+        int oldPrice = _shipModel.GetAttackPrice();
+        _shipModel.UpgradeAttack(); 
+        SaveShip.SaveShipData(_shipModel);
+        float newPrice = _shipModel.GetAttackPrice();
+        DOTween.To(() => oldPrice, x =>
+        {
+            _attackPriceText.text = "Цена: " + x.ToString("F0");
+        }, newPrice, 0.5f);
+        DOTween.To(() => oldAttack, x =>
+        {
+            _attackText.text = Mathf.RoundToInt(x).ToString("f0");
+            _imageFillAttack.fillAmount = x / _shipModel.MaxAttack;
+        }, _shipModel.CurrentAttack, 0.5f);
+        UpdateUI();
+    }
+    public void BuyUpAttackSpeed()
+    {
+        if (!Wallet.Instance.Spend(_shipModel.GetAttackSpeedPrice()))
         {
             return;
         }
 
-        _ship.BaseHealth += 20;
-        _ship.CurrentHealthLevel++;
-        EventsManager.UpActivation(-_ship.PriceUpHealth); ScinInfoInizialize();
-    }
-    public void BuyUpAttack()
-    {
-        if (MenuManager.TotalMoney < _ship.PriceUpAttack)
+        float oldAttackSpeed = _shipModel.CurrentAttackSpeed;
+        int oldPrice = _shipModel.GetAttackSpeedPrice();
+        _shipModel.UpgradeAttackSpeed();
+        SaveShip.SaveShipData(_shipModel);
+        float newPrice = _shipModel.GetAttackSpeedPrice();
+        DOTween.To(() => oldPrice, x =>
         {
-            return;
-        }
-        _ship.BaseAttack += 1;
-        _ship.CurrentAttackLevel++;
-        EventsManager.UpActivation(-_ship.PriceUpAttack); ScinInfoInizialize();
-    }
-    public void BuyUpAttackSpeed()
-    {
-        if (MenuManager.TotalMoney < _ship.PriceUpAttackSpeed)
+            _attackSpeedPriceText.text = "Цена: " + x.ToString("F0");
+        }, newPrice, 0.5f);
+        DOTween.To(() => oldAttackSpeed, x =>
         {
-            return;
-        }
-        _ship.BaseAttackSpeed += 1f;
-        _ship.CurrentAttackSpeedLevel++;
-        EventsManager.UpActivation(-_ship.PriceUpAttackSpeed); ScinInfoInizialize();
+            _attackSpeedText.text = x.ToString("F1") + "/s";
+            _imageFillAttackSpeed.fillAmount = x / _shipModel.MaxAttackSpeed;
+        }, _shipModel.CurrentAttackSpeed, 0.5f);
+        UpdateUI();
     }
 }

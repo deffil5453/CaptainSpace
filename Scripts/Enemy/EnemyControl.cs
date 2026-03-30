@@ -43,6 +43,7 @@ public class EnemyControl : MonoBehaviour
         gameManager.AddScore(_enemyLevel);
         _isDead = true;
         SoundManager.Instance.EnemyDeadAudio();
+        Instantiate(DestroyEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
         //StartCoroutine(HandleDeath());
 
@@ -68,10 +69,6 @@ public class EnemyControl : MonoBehaviour
             Destroy(soundObject, DeadSound.length);
         }
         yield return new WaitForSeconds(DestroyEffect.main.duration);
-    }
-    private void OnDestroy()
-    {
-        Instantiate(DestroyEffect, transform.position, Quaternion.identity);
     }
     private void OnApplicationPause(bool pause)
     {

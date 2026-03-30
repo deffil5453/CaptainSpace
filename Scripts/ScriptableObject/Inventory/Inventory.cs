@@ -4,4 +4,5 @@ public class Inventory : ScriptableObject
 {
     public int Coins;
     public Ship CurrentShip;
+    
 }

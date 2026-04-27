@@ -23,10 +23,12 @@ MonoBehaviour:
   StepHealthUpgrade: 10
   StepAttackUpgrade: 1
   StepAttackSpeedUpgrade: 0.4
-  MaxLevel: 20
+  MaxLevel: 15
   Price: 0
   State: 2
   PriceUpHealth: 25
   PriceUpAttack: 25
   PriceUpAttackSpeed: 25
   StepPriceMultiplier: 5
+  ShipDescription: 
+  RuShipDescription: 

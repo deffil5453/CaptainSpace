@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-
+using PlayerPrefs = RedefineYG.PlayerPrefs;
 public class ScinShipControl : MonoBehaviour
 {
     [SerializeField] private Ship _ship;

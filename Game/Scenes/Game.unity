@@ -577,6 +577,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies:
   - {fileID: 5518947892500982815, guid: cdb4d70cd9098334c94dd7345282c569, type: 3}
+  - {fileID: 5518947892500982815, guid: ff746053f8e5c934a9420874d1bb3f89, type: 3}
+  - {fileID: 5518947892500982815, guid: ea19ffb19bf826d44be89ebb9bbe22e7, type: 3}
+  - {fileID: 5518947892500982815, guid: e60b708078e07f347b65ffcff22aca26, type: 3}
   _minXSpawnPosition: -2.4
   _maxXSpawnPosition: 2.4
   _minSpawnDelay: 0.5
@@ -1172,6 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  _spaceShipSpawnScript: {fileID: 0}
 --- !u!1 &915872178
 GameObject:
   m_ObjectHideFlags: 0

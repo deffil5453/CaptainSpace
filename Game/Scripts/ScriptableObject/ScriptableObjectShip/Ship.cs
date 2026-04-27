@@ -30,4 +30,8 @@ public class Ship : ScriptableObject
     public int PriceUpAttackSpeed;
     [Header("шаг для увеличения цены")]
     public int StepPriceMultiplier;
+
+    [Header("Описание корабля")]
+    public string ShipDescription;
+    public string RuShipDescription;
 }

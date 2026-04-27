@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using PlayerPrefs = RedefineYG.PlayerPrefs;
 public static class SaveShip
 {
     private const string _HealthKey = "_HealthLevel";

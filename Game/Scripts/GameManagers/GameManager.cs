@@ -1,8 +1,8 @@
 using System;
-
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using PlayerPrefs = RedefineYG.PlayerPrefs;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,11 +16,7 @@ public class GameManager : MonoBehaviour
     public int KillEnemyToWin = 10;
 
     private int _score;
-    private int _moneyGame;
     private int _totalMoneyGame;
-
-    private int _selectIdShip;
-    private GameObject _currentSpaceShip;
 
     public event Action OnEnemyKilled;
     public event Action OnGameWin;
@@ -35,10 +31,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        _levelWafe = PlayerPrefs.GetInt("LevelWafe", 1);
-        KillEnemyToWin = 6;
+        KillEnemyToWin = 7;
         //KillEnemyToWin = KillEnemyToWin *_levelWafe;
-        KillEnemyToWin = (KillEnemyToWin * _levelWafe) / 2;
         //Debug.Log(KillEnemyToWin);
         //Debug.Log(_levelWafe);
     }
@@ -54,7 +48,9 @@ public class GameManager : MonoBehaviour
     private void LoadGameData()
     {
         //SpawnSpaceShip();
+        _levelWafe = PlayerPrefs.GetInt("LevelWafe");
         _totalMoneyGame = PlayerPrefs.GetInt("PlayerMoney", 0);
+        KillEnemyToWin = (KillEnemyToWin * _levelWafe) / 2;
 
     }
 
@@ -68,17 +64,12 @@ public class GameManager : MonoBehaviour
         OnGameWin?.Invoke();
         WinPanel.SetActive(true);
         Debug.Log("отработал");
+        
         SaveGameData();
-        _levelWafe += 1;
-        PlayerPrefs.SetInt("LevelWafe", _levelWafe);
         Time.timeScale = 0f;
         //Time.timeScale = 0;
     }
-    private void AddMoney(int amount)
-    {
-        _moneyGame += amount;
-        _totalMoneyGame += amount;
-    }
+
     public void PlayerDead()
     {
         SaveGameData();
@@ -88,11 +79,16 @@ public class GameManager : MonoBehaviour
     }
     private void SaveGameData()
     {
+        int oldscore = PlayerPrefs.GetInt("MaxScore");
         //PlayerPrefs.SetInt("PlayerMoney", KillEnemyToWin);
-        if (PlayerPrefs.GetInt("MaxScore", 0) < _score)
-        {
-            PlayerPrefs.SetInt("MaxScore", _score);
-        }
+        _levelWafe += 1;
+        Debug.Log(_levelWafe);
+        PlayerPrefs.SetInt("LevelWafe", _levelWafe);
+        Debug.Log($"сохранил {_levelWafe}");
+        PlayerPrefs.Save();
+        Debug.Log(_score + oldscore);
+        PlayerPrefs.SetInt("MaxScore", _score + oldscore);
+
         PlayerPrefs.Save();
     }
     //private void UpdateTextScore()

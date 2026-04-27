@@ -14,19 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Key: FiaShip
   Prefab: {fileID: 6097491702223864399, guid: e72e85d5dc149014793b39038b8d3659, type: 3}
-  BaseHealth: 200
-  BaseAttack: 15
+  BaseHealth: 400
+  BaseAttack: 50
   BaseAttackSpeed: 1
   CurrentHealthLevel: 1
   CurrentAttackLevel: 1
   CurrentAttackSpeedLevel: 1
   StepHealthUpgrade: 20
-  StepAttackUpgrade: 3
+  StepAttackUpgrade: 4
   StepAttackSpeedUpgrade: 0.1
-  MaxLevel: 20
-  Price: 2500
+  MaxLevel: 40
+  Price: 900
   State: 0
-  PriceUpHealth: 200
-  PriceUpAttack: 200
-  PriceUpAttackSpeed: 200
+  PriceUpHealth: 150
+  PriceUpAttack: 150
+  PriceUpAttackSpeed: 150
   StepPriceMultiplier: 10
+  ShipDescription: "\u0417\u0430 \u0441\u0447\u0451\u0442 \u0441\u0432\u043E\u0435\u0439
+    \u043C\u043E\u0449\u043D\u043E\u0439 \u0430\u0442\u0430\u043A\u0438, \u043E\u043D
+    \u0443\u0441\u0438\u043B\u0438\u0432\u0430\u0435\u0442 \u043F\u0440\u043E\u0431\u0438\u0432\u043D\u0443\u044E
+    \u0441\u043F\u043E\u0441\u043E\u0431\u043D\u043E\u0441\u0442\u044C"
+  RuShipDescription: With its powerful attack, it enhances its penetration ability.

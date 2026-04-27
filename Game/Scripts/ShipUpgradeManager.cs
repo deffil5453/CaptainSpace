@@ -108,7 +108,7 @@ public class ShipUpgradeManager : MonoBehaviour
     }
     public void BuyUpHealth()
     {
-        if (!Wallet.Instance.Spend(_shipModel.GetHealthPrice()))
+        if (_shipModel.CurrentHealth >= _shipModel.MaxHealth || !Wallet.Instance.Spend(_shipModel.GetHealthPrice()))
         {
             return;
         }
@@ -142,10 +142,12 @@ public class ShipUpgradeManager : MonoBehaviour
     }
     public void BuyUpAttack()
     {
-        if (!Wallet.Instance.Spend(_shipModel.GetAttackPrice()))
+        if (_shipModel.CurrentAttack >= _shipModel.MaxAttack || !Wallet.Instance.Spend(_shipModel.GetAttackPrice()))
         {
             return;
         }
+        Debug.Log(_shipModel.CurrentAttack);
+        Debug.Log(_shipModel.MaxAttack);
         float oldAttack = _shipModel.CurrentAttack;
         int oldPrice = _shipModel.GetAttackPrice();
         _shipModel.UpgradeAttack();
@@ -174,7 +176,7 @@ public class ShipUpgradeManager : MonoBehaviour
     }
     public void BuyUpAttackSpeed()
     {
-        if (!Wallet.Instance.Spend(_shipModel.GetAttackSpeedPrice()))
+        if (_shipModel.CurrentAttackSpeed >= _shipModel.MaxAttackSpeed || !Wallet.Instance.Spend(_shipModel.GetAttackSpeedPrice()) )
         {
             return;
         }

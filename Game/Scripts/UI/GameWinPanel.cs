@@ -17,7 +17,7 @@ public class GameWinPanel : MonoBehaviour
         Debug.Log("подписался");
         _canvasGroup.alpha = 0f;
         _canvasGroup.blocksRaycasts = false;
-        _rewardWin = GameManager.instance.KillEnemyToWin * 3;
+        _rewardWin = GameManager.instance.KillEnemyToWin * 4;
         ShowWindow();
         //ScinInfoInizialize();     
     }

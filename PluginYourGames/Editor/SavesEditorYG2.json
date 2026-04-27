@@ -1,0 +1,43 @@
+{
+  "stringKeys": [],
+  "stringValues": [],
+  "floatKeys": [],
+  "floatValues": [],
+  "intKeys": [
+    "MaxScore",
+    "LevelWafe",
+    "PlayerMoney",
+    "BlueShip_HealthLevel",
+    "BlueShip_AttackLevel",
+    "BlueShip_AttackSpeedLevel",
+    "FiaShip_HealthLevel",
+    "FiaShip_AttackLevel",
+    "FiaShip_AttackSpeedLevel",
+    "GreenShip_HealthLevel",
+    "GreenShip_AttackLevel",
+    "GreenShip_AttackSpeedLevel"
+  ],
+  "intValues": [
+    353,
+    17,
+    234,
+    15,
+    15,
+    13,
+    5,
+    3,
+    4,
+    21,
+    1,
+    0
+  ],
+  "intExample": 5,
+  "strExample": "Hello!",
+  "boolExample": [
+    false,
+    false,
+    false,
+    false
+  ],
+  "idSave": 320
+}

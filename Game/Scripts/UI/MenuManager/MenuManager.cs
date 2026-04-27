@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
-
+using PlayerPrefs = RedefineYG.PlayerPrefs;
 
 public class MenuManager : MonoBehaviour
 {
@@ -14,10 +14,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TMP_Text _totalMoneyText;
     [SerializeField] private TMP_Text _maxScoreText;
     [SerializeField] private TMP_Text _purposeText;
+    [SerializeField] private TMP_Text _rewardMoneyText;
     private int _oldMoney;
     private int _wafeLevel = 1;
     private int _purposeToDestroyWave;
     private int _totalEnemyDestroyed = 0;
+    
     public List<ScinShipControl> Skins;
     private void Awake()
     {
@@ -35,8 +37,8 @@ public class MenuManager : MonoBehaviour
     }
     private void Start()
     {
-        _purposeToDestroyWave = (6 * PlayerPrefs.GetInt("LevelWafe", 1)) / 2;
-        _totalEnemyDestroyed += PlayerPrefs.GetInt("MaxScore", 0);
+        _purposeToDestroyWave = (7 * PlayerPrefs.GetInt("LevelWafe", 1)) / 2;
+        _totalEnemyDestroyed = PlayerPrefs.GetInt("MaxScore", 0);
         if (YG2.envir.language == "ru")
         {
             _maxScoreText.text = $"Всего уничтожено: {_totalEnemyDestroyed}";
@@ -51,6 +53,7 @@ public class MenuManager : MonoBehaviour
 
 
         Wallet.Instance.OnMoneyChanged += UpdateMoney;
+        
         LoadMoney();
     }
     private void Update()
@@ -64,7 +67,7 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         SoundManager.Instance.PlaySound(SoundType.UIClick);
-        YG2.InterstitialAdvShow();
+        //YG2.InterstitialAdvShow();
         _wafeLevel++;
         SceneManager.LoadScene("Game");
     }
@@ -79,11 +82,7 @@ public class MenuManager : MonoBehaviour
         //TotalMoney = 1000;
         UpdateMoney(0, Wallet.Instance.Money);
     }
-
-    public void AdvRewardMoney()
-    {
-        RewardManager.Instance.AdvRewardMoney(50);
-    }
+        
     private void UpdateMoney(int minvalue, int maxValue)
     {
         DOTween.To(() => minvalue, x =>
@@ -92,6 +91,7 @@ public class MenuManager : MonoBehaviour
             _oldMoney = x;
         }, maxValue, 0.5f);
     }
+    
     public void ResetShip()
     {
         foreach (var item in Skins)
